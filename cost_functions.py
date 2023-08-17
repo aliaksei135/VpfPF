@@ -34,9 +34,9 @@ def marginal_vehicle_costs(seconds):
     if VARIANT == 'current':
         return (32.44 + 175.64) * hrs
     elif VARIANT == 'future':
-        return (20.33 + 31.44) * hrs
+        return (20.33 + (31.44/20)) * hrs
     elif VARIANT == 'tipping_point':
-        return (5.99 + 32.49) * hrs
+        return (5.99 + (32.49/20)) * hrs
 
 
 def marginal_vpf_costs(grid, current, neighbour):
