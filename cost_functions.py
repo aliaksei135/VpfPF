@@ -17,7 +17,7 @@
 
 
 from bresenham import make_line
-from config import get_variant, get_vpf, get_speed, get_resolution
+from config import get_variant, get_vpf, get_speed, get_resolution, VALUE_CAPITAL, PROB_LOSS_PER_FLT_HR
 
 
 def fixed_vehicle_costs():
@@ -30,13 +30,14 @@ def fixed_vehicle_costs():
 
 def marginal_vehicle_costs(seconds):
     hrs = seconds / 3600
+    cvar_cost = VALUE_CAPITAL * PROB_LOSS_PER_FLT_HR * hrs
     VARIANT = get_variant()
     if VARIANT == 'current':
-        return (32.44 + 175.64) * hrs
+        return ((32.44 + 175.64) * hrs) + cvar_cost
     elif VARIANT == 'future':
-        return (20.33 + (31.44/20)) * hrs
+        return ((20.33 + (31.44/20)) * hrs) + cvar_cost
     elif VARIANT == 'tipping_point':
-        return (5.99 + (32.49/20)) * hrs
+        return ((5.99 + (32.49/20)) * hrs) + cvar_cost
 
 
 def marginal_vpf_costs(grid, current, neighbour):
